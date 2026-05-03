@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>North End Cafe | Artisan Coffee & Pastry</title>
+  <!-- Google Fonts + simple reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fef7e8;  /* warm oat base — aesthetic, cozy */
+      font-family: 'Inter', sans-serif;
+      color: #2c241a;
+      line-height: 1.4;
+    }
+
+    /* smooth scroll + container */
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header section with new premium feel */
+    .hero {
+      background: linear-gradient(135deg, #fff5eb 0%, #fae9d9 100%);
+      border-radius: 0 0 3rem 3rem;
+      margin-bottom: 2rem;
+      padding: 2rem 0 2rem 0;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+    }
+
+    .hero-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      background: linear-gradient(125deg, #b87c4f, #5e3a25);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .logo p {
+      font-size: 0.8rem;
+      color: #8b694e;
+      letter-spacing: 0.4px;
+    }
+
+    .rating-badge {
+      background: rgba(255,248,235,0.8);
+      backdrop-filter: blur(2px);
+      padding: 8px 18px;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .rating-badge span {
+      color: #d4a373;
+      font-weight: 700;
+    }
+
+    /* hero image zone — aesthetic vibes pic */
+    .hero-visual {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+    .hero-text {
+      flex: 1.2;
+    }
+    .hero-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 500;
+      color: #4b2e1e;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+    .hero-text p {
+      font-size: 1rem;
+      color: #6b4c34;
+      max-width: 85%;
+      margin-bottom: 1.5rem;
+    }
+    .hero-img-card {
+      flex: 1;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .hero-img-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s;
+    }
+    .hero-img-card:hover img {
+      transform: scale(1.02);
+    }
+
+    /* stats row */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      background: #fffaf4;
+      border-radius: 2rem;
+      padding: 1.2rem 1rem;
+      margin: 1.8rem 0;
+      gap: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: #b1622c;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: #7c5f46;
+    }
+
+    /* menu categories + layout */
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      margin: 2rem 0 1.2rem 0;
+    }
+    .menu-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 500;
+    }
+    .category-filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid #e2cfbc;
+      padding: 8px 22px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #4a2f1f;
+    }
+    .filter-btn.active {
+      background: #b97f54;
+      border-color: #b97f54;
+      color: white;
+      box-shadow: 0 4px 10px rgba(185,127,84,0.2);
+    }
+    .filter-btn:hover:not(.active) {
+      background: #f2e0d0;
+      border-color: #d4b48c;
+    }
+
+    /* menu grid — items with images */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 28px;
+      margin: 2rem 0 2.5rem;
+    }
+    .menu-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03);
+      border: 1px solid #f4e5da;
+      cursor: pointer;
+    }
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 28px -12px rgba(89, 55, 31, 0.12);
+      border-color: #eedbcb;
+    }
+    .card-img {
+      height: 180px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .card-info {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+    .card-info h4 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .card-info .price {
+      font-weight: 700;
+      color: #b97f54;
+      margin: 8px 0;
+      font-size: 1.1rem;
+    }
+    .card-info p {
+      font-size: 0.8rem;
+      color: #7c6552;
+    }
+    .add-badge {
+      margin-top: 12px;
+      background: #f9efea;
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 60px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #aa6f46;
+    }
+
+    /* order panel (cart) - redesigned aesthetic */
+    .order-section {
+      background: #ffffffea;
+      border-radius: 2rem;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
+      padding: 1.6rem;
+      margin: 2rem 0 3rem;
+      border: 1px solid #f0dfd0;
+    }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid #f8ede3;
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .order-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+    }
+    .cart-items-list {
+      min-height: 140px;
+      max-height: 280px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fefaf6;
+      border-radius: 70px;
+      padding: 8px 16px;
+      margin-bottom: 8px;
+    }
+    .cart-item-details {
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+    .cart-item-name {
+      font-weight: 500;
+    }
+    .cart-item-price {
+      color: #b97f54;
+      font-weight: 500;
+    }
+    .cart-item-remove {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #bc8a64;
+      padding: 0 8px;
+    }
+    .cart-total {
+      text-align: right;
+      font-weight: 700;
+      font-size: 1.3rem;
+      border-top: 1px solid #e9dbcf;
+      padding-top: 1rem;
+      margin-top: 0.5rem;
+    }
+    .empty-cart-msg {
+      text-align: center;
+      padding: 1.8rem 0;
+      color: #b38c6c;
+      font-style: italic;
+    }
+    .reset-btn {
+      background: #f1e1d4;
+      border: none;
+      padding: 8px 24px;
+      border-radius: 60px;
+      font-weight: 500;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .reset-btn:hover {
+      background: #e2cebc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid #ecdccd;
+      margin-top: 1rem;
+      color: #937a62;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 780px) {
+      .hero-text h2 { font-size: 2rem; }
+      .hero-visual { flex-direction: column; }
+      .hero-text p { max-width: 100%; }
+      .menu-header { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="hero">
+  <div class="container">
+    <div class="hero-top">
+      <div class="logo">
+        <h1>☕ North End Cafe</h1>
+        <p>Premium Coffee Experience · Artisan Spirit</p>
+      </div>
+      <div class="rating-badge">
+        ⭐ 4.8 <span>★</span> (10k+ happy customers)
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-text">
+        <h2>New Season<br>Specials</h2>
+        <p>Handcrafted coffee, tea, and pastries made with love — discover our premium selection, roasted in-house, paired with seasonal ingredients.</p>
+      </div>
+      <div class="hero-img-card">
+        <!-- aesthetic vibes main image: coffee + pastry scene -->
+        <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=800" alt="aesthetic cafe vibe with coffee and croissant" loading="lazy">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-number">50+</div><div class="stat-label">Menu Items</div></div>
+    <div class="stat-item"><div class="stat-number">4.8</div><div class="stat-label">Rating</div></div>
+    <div class="stat-item"><div class="stat-number">10k+</div><div class="stat-label">Happy Customers</div></div>
+  </div>
+
+  <!-- Our Menu + filters -->
+  <div class="menu-header">
+    <h3>Our Menu</h3>
+    <div class="category-filters">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="Coffee">☕ Coffee</button>
+      <button class="filter-btn" data-cat="Tea">🍃 Tea</button>
+      <button class="filter-btn" data-cat="Pastry">🥐 Pastry</button>
+      <button class="filter-btn" data-cat="Dessert">🍰 Dessert</button>
+    </div>
+  </div>
+
+  <!-- dynamic menu grid injected from js -->
+  <div id="menuGrid" class="menu-grid"></div>
+
+  <!-- Your order / cart section -->
+  <div class="order-section">
+    <div class="order-header">
+      <h3>Your Order 🧾</h3>
+      <span style="font-size: 0.85rem;">Freshly prepared</span>
+    </div>
+    <div id="cartContainer">
+      <!-- cart dynamic content -->
+      <div class="empty-cart-msg">✨ No items found — try selecting a different category or add items from our menu to get started ✨</div>
+    </div>
+    <div id="cartFooter"></div>
+    <button id="resetCartBtn" class="reset-btn">Clear order</button>
+  </div>
+</div>
+<footer>
+  © North End Cafe — Artisan blends & bites · warm aesthetic moments
+</footer>
+
+<script>
+  // ---------- MENU ITEMS (with coffee, tea, pastry, dessert images + specific pics) ----------
+  // using unsplash/pexels high quality aesthetic pics for each category
+  const menuData = [
+    // COFFEE category (4 items)
+    { id: 1, name: "Velvet Latte", category: "Coffee", price: 4.9, desc: "Smooth espresso + oat milk", img: "https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 2, name: "Hazelnut Cold Brew", category: "Coffee", price: 5.2, desc: "Nitro infused, silky", img: "https://images.pexels.com/photos/2259471/pexels-photo-2259471.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 3, name: "Caramel Macchiato", category: "Coffee", price: 5.5, desc: "Layers of vanilla & caramel", img: "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 4, name: "Mocha Affogato", category: "Coffee", price: 6.3, desc: "Double espresso + dark chocolate", img: "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    // TEA category (4 items)
+    { id: 5, name: "Jasmine Pearl Tea", category: "Tea", price: 4.2, desc: "Floral & fragrant", img: "https://images.pexels.com/photos/5696459/pexels-photo-5696459.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 6, name: "Masala Chai Latte", category: "Tea", price: 4.8, desc: "Spiced with cinnamon & cardamom", img: "https://images.pexels.com/photos/3380817/pexels-photo-3380817.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 7, name: "Matcha Zen", category: "Tea", price: 5.1, desc: "Ceremonial matcha, steamed milk", img: "https://images.pexels.com/photos/5386767/pexels-photo-5386767.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 8, name: "Iced Hibiscus", category: "Tea", price: 4.5, desc: "Refreshing berry notes", img: "https://images.pexels.com/photos/3876542/pexels-photo-3876542.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    // PASTRY category (4 items)
+    { id: 9, name: "Butter Croissant", category: "Pastry", price: 3.9, desc: "Flaky, 72h laminated dough", img: "https://images.pexels.com/photos/3914797/pexels-photo-3914797.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 10, name: "Almond Pain au Chocolat", category: "Pastry", price: 4.7, desc: "With dark chocolate batons", img: "https://images.pexels.com/photos/5412162/pexels-photo-5412162.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 11, name: "Cinnamon Roll", category: "Pastry", price: 4.3, desc: "Cream cheese glaze", img: "https://images.pexels.com/photos/8317388/pexels-photo-8317388.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 12, name: "Savory Scone", category: "Pastry", price: 3.5, desc: "Cheddar & chive", img: "https://images.pexels.com/photos/6992465/pexels-photo-6992465.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    // DESSERT category (4 items)
+    { id: 13, name: "Tiramisu Cup", category: "Dessert", price: 5.9, desc: "Layers of mascarpone & espresso", img: "https://images.pexels.com/photos/2254510/pexels-photo-2254510.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 14, name: "Salted Caramel Cheesecake", category: "Dessert", price: 6.5, desc: "Silky NY style", img: "https://images.pexels.com/photos/2368813/pexels-photo-2368813.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 15, name: "Chocolate Lava Cake", category: "Dessert", price: 6.0, desc: "Molten center, vanilla ice cream", img: "https://images.pexels.com/photos/4171972/pexels-photo-4171972.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { id: 16, name: "Berry Panna Cotta", category: "Dessert", price: 5.2, desc: "Mixed berry compote", img: "https://images.pexels.com/photos/6566845/pexels-photo-6566845.jpeg?auto=compress&cs=tinysrgb&w=600" }
+  ];
+
+  // shopping cart (local state)
+  let cart = [];   // each { id, name, price, quantity? but simpler: store item objects with quantity, we'll aggregate)
+
+  // helper to add item
+  function addToCart(item) {
+    const existing = cart.find(i => i.id === item.id);
+    if(existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({ ...item, quantity: 1 });
+    }
+    renderCart();
+    saveCartToLocal();
+  }
+
+  function removeFromCart(id) {
+    const idx = cart.findIndex(i => i.id === id);
+    if(idx !== -1) {
+      if(cart[idx].quantity > 1) cart[idx].quantity -= 1;
+      else cart.splice(idx,1);
+    }
+    renderCart();
+    saveCartToLocal();
+  }
+
+  function clearCart() {
+    cart = [];
+    renderCart();
+    saveCartToLocal();
+  }
+
+  function getTotal() {
+    return cart.reduce((sum, i) => sum + (i.price * i.quantity), 0).toFixed(2);
+  }
+
+  function saveCartToLocal() {
+    localStorage.setItem('northEndCart', JSON.stringify(cart));
+  }
+
+  function loadCartFromLocal() {
+    const stored = localStorage.getItem('northEndCart');
+    if(stored) {
+      try {
+        cart = JSON.parse(stored);
+      } catch(e) { cart = []; }
+    } else cart = [];
+    renderCart();
+  }
+
+  // Render cart UI
+  function renderCart() {
+    const cartContainer = document.getElementById('cartContainer');
+    const cartFooter = document.getElementById('cartFooter');
+    if(!cartContainer) return;
+    if(cart.length === 0) {
+      cartContainer.innerHTML = `<div class="empty-cart-msg">🍃 No items found — Try selecting a different category<br>Add items from our menu to get started</div>`;
+      cartFooter.innerHTML = '';
+      return;
+    }
+    let html = `<div class="cart-items-list">`;
+    cart.forEach(item => {
+      html += `
+        <div class="cart-item">
+          <div class="cart-item-details">
+            <span class="cart-item-name">${escapeHtml(item.name)}</span>
+            <span class="cart-item-price">$${item.price.toFixed(2)}</span>
+            <span style="font-size:0.8rem;">x${item.quantity}</span>
+          </div>
+          <button class="cart-item-remove" data-id="${item.id}">🗑️</button>
+        </div>
+      `;
+    });
+    html += `</div>`;
+    cartContainer.innerHTML = html;
+    cartFooter.innerHTML = `<div class="cart-total">Total: $${getTotal()}</div>`;
+    // attach remove events
+    document.querySelectorAll('.cart-item-remove').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(btn.getAttribute('data-id'));
+        removeFromCart(id);
+      });
+    });
+  }
+
+  // render menu grid based on active category
+  let activeCategory = "all";
+
+  function renderMenu() {
+    const grid = document.getElementById('menuGrid');
+    if(!grid) return;
+    let filtered = menuData;
+    if(activeCategory !== "all") {
+      filtered = menuData.filter(item => item.category === activeCategory);
+    }
+    if(filtered.length === 0) {
+      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem;">✨ No items in this category — try something delicious ✨</div>`;
+      return;
+    }
+    grid.innerHTML = filtered.map(item => `
+      <div class="menu-card" data-item='${JSON.stringify(item)}'>
+        <img class="card-img" src="${item.img}" alt="${item.name}" loading="lazy" onerror="this.src='https://images.pexels.com/photos/6305501/pexels-photo-6305501.jpeg?auto=compress&w=400'">
+        <div class="card-info">
+          <h4>${escapeHtml(item.name)}</h4>
+          <div class="price">$${item.price.toFixed(2)}</div>
+          <p>${escapeHtml(item.desc)}</p>
+          <div class="add-badge">+ Add to order</div>
+        </div>
+      </div>
+    `).join('');
+
+    // attach add events
+    document.querySelectorAll('.menu-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // prevent if clicked on remove?
+        const raw = card.getAttribute('data-item');
+        if(raw) {
+          const product = JSON.parse(raw);
+          addToCart(product);
+          // subtle feedback (optional)
+          const badge = card.querySelector('.add-badge');
+          if(badge) {
+            const original = badge.innerText;
+            badge.innerText = "✓ Added!";
+            setTimeout(() => { if(badge) badge.innerText = original; }, 800);
+          }
+        }
+      });
+    });
+  }
+
+  // filter switching + active UI
+  function initFilters() {
+    const btns = document.querySelectorAll('.filter-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-cat');
+        if(!cat) return;
+        activeCategory = cat;
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderMenu();
+      });
+    });
+  }
+
+  // simple escape
+  function escapeHtml(str) {
+    return str.replace(/[&<>]/g, function(m) {
+      if(m === '&') return '&amp;';
+      if(m === '<') return '&lt;';
+      if(m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  // reset button
+  document.addEventListener('DOMContentLoaded', () => {
+    loadCartFromLocal();
+    renderMenu();
+    initFilters();
+    const resetBtn = document.getElementById('resetCartBtn');
+    if(resetBtn) resetBtn.addEventListener('click', () => { clearCart(); });
+    // also to survive page reload, we already loadCartFromLocal
+    window.addEventListener('beforeunload', () => {
+      saveCartToLocal();
+    });
+  });
+</script>
+</body>
+</html>
